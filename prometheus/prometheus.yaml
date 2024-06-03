@@ -27,3 +27,15 @@ scrape_configs:
   - source_labels: [__meta_kubernetes_service_name]
     regex: prometheus-server
     action: drop
+- job_name: "Kubelet"
+  metrics_path: "/metrics/cadvisor"
+  scheme: "https"
+  honor_timestamps: true
+  bearer_token_file: /hasbase/installs/token
+  tls_config:
+    insecure_skip_verify: true
+  kubernetes_sd_configs:
+  - role: pod
+    selector:
+      match_labels:
+        "k8s.io/kubernetes.pod.extension/kubelet": "true"
