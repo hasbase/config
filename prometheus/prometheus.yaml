@@ -36,6 +36,9 @@ scrape_configs:
     insecure_skip_verify: true
   kubernetes_sd_configs:
   - role: pod
+    namespaces:
+      names:
+      - kube-system
     selector:
       match_labels:
         "k8s.io/kubernetes.pod.extension/kubelet": "true"
