@@ -39,6 +39,6 @@ scrape_configs:
     namespaces:
       names:
       - kube-system
-    selector:
-      match_labels:
-        "k8s.io/kubernetes.pod.extension/kubelet": "true"
+    selectors:
+      - role: pod
+        label: "k8s-app=metrics-server"
