@@ -46,7 +46,7 @@ spec:
         #   value: "true"
 
         # Mounting custom error page from configMap
-        # volumeMounts:
+        volumeMounts:
         - name: custom_error_pages
           mountPath: /www
 
