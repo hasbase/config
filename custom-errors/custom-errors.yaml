@@ -26,6 +26,23 @@ spec:
       storage: 1Gi
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: custom-error-pages
+data:
+  404.html: |
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>404 Not Found</title>
+    </head>
+    <body>
+      <h1>404 Not Found</h1>
+      <p>unavailable.</p>
+    </body>
+    </html>
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: nginx-errors
@@ -79,7 +96,9 @@ spec:
       # Mounting custom error page from configMap
       volumes:
       - name: custom-error-pages
-        persistentVolumeClaim:
-          claimName: custom-error-pages-pvc
-      #     - key: "503"
-      #       path: "503.html"
+        configMap:
+          name: custom-error-pages
+          items:
+          - key: 404.html
+            path: 404.html
+---
