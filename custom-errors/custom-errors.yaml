@@ -73,12 +73,12 @@ spec:
 
         # Mounting custom error page from configMap
         volumeMounts:
-        - name: custom_error_pages
+        - name: custom-error-pages
           mountPath: /www
 
       # Mounting custom error page from configMap
       volumes:
-      - name: custom_error_pages
+      - name: custom-error-pages
         persistentVolumeClaim:
           claimName: custom-error-pages-pvc
       #     - key: "503"
