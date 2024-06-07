@@ -1,3 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: custom-error-pages-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/hasbase/errors"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: custom-error-pages-pvc
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
@@ -53,10 +79,7 @@ spec:
       # Mounting custom error page from configMap
       volumes:
       - name: custom_error_pages
-        configMap:
-          name: custom_error_pages
-          items:
-          - key: "404"
-            path: "/hasbase/errors/404.html"
+        persistentVolumeClaim:
+          claimName: custom-error-pages-pvc
       #     - key: "503"
       #       path: "503.html"
