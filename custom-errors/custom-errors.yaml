@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: custom-error-pages-pv
+  namespace: ingress-nginx
   labels:
     type: local
 spec:
@@ -17,6 +18,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: custom-error-pages-pvc
+  namespace: ingress-nginx
 spec:
   storageClassName: manual
   accessModes:
@@ -29,6 +31,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: custom-error-pages
+  namespace: ingress-nginx
 data:
   404.html: |
     <!DOCTYPE html>
@@ -46,6 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nginx-errors
+  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: nginx-errors
     app.kubernetes.io/part-of: ingress-nginx
@@ -62,6 +66,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-errors
+  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: nginx-errors
     app.kubernetes.io/part-of: ingress-nginx
