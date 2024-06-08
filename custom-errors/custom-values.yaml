@@ -1,6 +1,13 @@
+# controller.metrics.enabled=true --set-string controller.podAnnotations."prometheus\.io/scrape"="true" --set-string controller.podAnnotations."prometheus\.io/port"="10254"
 controller:
   config:
     custom-http-errors: "404"
+  metrics:
+    enabled: true
+  podAnnotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "10254"
+  
 defaultBackend:
   enabled: true
   image:
