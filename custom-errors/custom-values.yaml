@@ -9,8 +9,8 @@ defaultBackend:
     tag: "v20230505@sha256:3600dcd1bbd0d05959bb01af4b272714e94d22d24a64e91838e7183c80e53f7f"
   extraVolumes:
   - name: custom-error-pages
-    volumeSource:
-      persistentVolumeClaim:
-        claimName: custom-error-pages-pvc
+    persistentVolumeClaim:
+      claimName: custom-error-pages-pvc
+  extraVolumeMounts:
   - name: custom-error-pages
     mountPath: /www
